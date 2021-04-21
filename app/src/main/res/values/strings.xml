@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppFinalProject</string>
+    <string name="app_name">2DelCassarApp</string>
     <string name="user_name_email">Nombre de usuario o correo</string>
     <string name="input_name_email">Ingrese su nombre o correo electrónico:</string>
     <string name="login">Ingresar</string>
@@ -16,4 +16,15 @@
     <string name="email">Correo electrónico</string>
     <string name="register_button">Registrarse</string>
     <string name="confirm_password">Confirmar contraseña</string>
+    <string name="title_login">Ingresar a Del Cassar App</string>
+    <string name="input_user_name_error">Ingrese un nombre de usuario</string>
+    <string name="input_email_error">Ingrese un correo electónico</string>
+    <string name="input_pasword_error">Ingrese una contraseña</string>
+    <string name="repeat_password">Repita la contraseña</string>
+    <string name="password_not_equal">Las contraseñas no coinciden</string>
+    <string name="input_user_email_error">Ingrese un usuario o correo</string>
+    <string name="user_email_error">El usuario o correo no existe</string>
+    <string name="user_nonexistent">El usuario no existe</string>
+    <string name="name_image">Nombre principal de la imagen</string>
+    <string name="digit_min">Mínimo 6 dígitos</string>
 </resources>
