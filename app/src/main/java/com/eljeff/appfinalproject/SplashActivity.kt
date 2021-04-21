@@ -25,6 +25,10 @@ class SplashActivity : AppCompatActivity() {
 
         val intent = Intent(this, LoginActivity::class.java)
 
+        //Creamos un usuario vacio para mandar
+        val user = User()
+        intent.putExtra("user", user)
+
         // Limpiamos la pila de actividades
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)

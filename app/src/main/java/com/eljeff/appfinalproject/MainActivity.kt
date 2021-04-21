@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding: ActivityMainBinding
 
+    private var user : User = User()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         //val data = intent.extras
         //val user : User = intent.extras?.getSerializable("user") as User
 
-        val user : User = intent.extras?.getSerializable("user") as User
+        user = intent.extras?.getSerializable("user") as User
         mainBinding.showEmailTxVw.text = user.email
 
         Log.d("metodo", "onCreate")
@@ -42,6 +44,8 @@ class MainActivity : AppCompatActivity() {
 
                 // Opción 1
                 val intent = Intent(this, LoginActivity::class.java)
+
+                intent.putExtra("user", user)
 
                 // Limpiamos la pila de actividades
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
