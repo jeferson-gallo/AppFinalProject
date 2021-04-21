@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">AppFinalProject</string>
+    <string name="user_name_email">Nombre de usuario o correo</string>
+    <string name="input_name_email">Ingrese su nombre o correo electrónico:</string>
+    <string name="login">Ingresar</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="hola_hola">Hola sapo Hp</string>
+    <string name="input_password">Ingrese su contraseña:</string>
+    <string name="password">Contraseña</string>
+    <string name="required_field">Campo requerido</string>
+    <string name="register">Registrarse</string>
+    <string name="register_title">Formulario de Registro</string>
+    <string name="input_user_name">Ingrese su nombre de usuario:</string>
+    <string name="user_name">Nombre de usuario</string>
+    <string name="input_email">Ingrese su correo electrónico:</string>
+    <string name="email">Correo electrónico</string>
+    <string name="register_button">Registrarse</string>
+    <string name="confirm_password">Confirmar contraseña</string>
 </resources>
