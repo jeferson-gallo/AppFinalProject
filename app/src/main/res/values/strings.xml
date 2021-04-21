@@ -16,4 +16,5 @@
     <string name="email">Correo electrónico</string>
     <string name="register_button">Registrarse</string>
     <string name="confirm_password">Confirmar contraseña</string>
+    <string name="title_login"><![CDATA[Ingresar a <name App>]]></string>
 </resources>
