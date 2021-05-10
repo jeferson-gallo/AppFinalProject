@@ -46,8 +46,6 @@ n
 >app/src/main/java/com/eljeff/appfinalproject/SplashActivity.kt,e\6\e657c8853fa0437620a9d622a5d3ab78ab7c9719
 m
 =app/src/main/java/com/eljeff/appfinalproject/LoginActivity.kt,5\c\5c49ed243a84fff8f55feac1ff7663c61fdd5b2d
-Y
-)app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
 T
 $.idea/codeStyles/codeStyleConfig.xml,d\d\dd7b3350c29c49497756c7f32c69a3bed18b1cba
 N
@@ -56,3 +54,5 @@ L
 .idea/codeStyles/Project.xml,6\e\6ecd6000a7b6f4a2884412ff19f74193ed089648
 d
 4app/src/main/java/com/eljeff/appfinalproject/User.kt,1\b\1b904216135050138e51db7ca90fa83c4d587ed5
+R
+"app/src/main/res/values/colors.xml,9\6\969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
