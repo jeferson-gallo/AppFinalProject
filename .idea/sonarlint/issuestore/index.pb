@@ -48,8 +48,6 @@ m
 =app/src/main/java/com/eljeff/appfinalproject/LoginActivity.kt,5\c\5c49ed243a84fff8f55feac1ff7663c61fdd5b2d
 T
 $.idea/codeStyles/codeStyleConfig.xml,d\d\dd7b3350c29c49497756c7f32c69a3bed18b1cba
-N
-app/src/main/res/menu/menu.xml,4\5\453a7c90e2bbd5580c6bce7f2f1d9a85b2c089db
 L
 .idea/codeStyles/Project.xml,6\e\6ecd6000a7b6f4a2884412ff19f74193ed089648
 d
