@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
 
         timer.schedule(timerTask {
             goToLoginActivity()
-        }, 1000
+        }, 1500
         ) // SE cierra schedule
     }
 
