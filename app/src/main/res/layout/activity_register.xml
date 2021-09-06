@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,8 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/register_title"
-            android:textColor="@color/primary_dark"
+            android:textColor="@color/buttons_color"
             android:textSize="24sp"
+            android:textStyle="bold|italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,6 +50,7 @@
                 android:id="@+id/user_name_reg_ed_tx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/background_layouts"
                 android:hint="@string/user_name"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -77,6 +80,7 @@
                 android:id="@+id/email_reg_ed_tx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/background_layouts"
                 android:hint="@string/email"
                 android:inputType="textWebEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -106,6 +110,7 @@
                 android:id="@+id/password_reg_ed_tx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/background_layouts"
                 android:hint="@string/password"
                 android:inputType="textWebPassword" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -124,16 +129,20 @@
                 android:id="@+id/conf_password_ed_tx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/background_layouts"
                 android:hint="@string/confirm_password"
-                android:inputType="textWebPassword" />
+                android:inputType="textPassword|textWebPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/register_button"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:backgroundTint="@color/buttons_color"
             android:text="@string/register_button"
+            android:textColor="@color/primary_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/conf_password_reg_tx_inp_lay" />
