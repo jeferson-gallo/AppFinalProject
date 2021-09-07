@@ -8,7 +8,7 @@
     <string name="input_password">Ingrese su contraseña:</string>
     <string name="password">Contraseña</string>
     <string name="required_field">Campo requerido</string>
-    <string name="register">Registrarse</string>
+    <string name="register"><u></u>Registrarse</string>
     <string name="register_title">Formulario de Registro</string>
     <string name="input_user_name">Ingrese su nombre de usuario:</string>
     <string name="user_name">Nombre de usuario</string>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "499756797674",
+    "project_id": "appfinalproject-b2c62",
+    "storage_bucket": "appfinalproject-b2c62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499756797674:android:f5ed0e3db1786b70c61193",
+        "android_client_info": {
+          "package_name": "com.eljeff.appfinalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499756797674-it791rcqk8lqh0bjvvbl1tpshlqdfr37.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ5x-Y9uRYxajflX97_2kX9ktTu8Rklu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499756797674-it791rcqk8lqh0bjvvbl1tpshlqdfr37.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
