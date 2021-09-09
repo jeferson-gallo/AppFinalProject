@@ -6,8 +6,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.eljeff.appfinalproject.databinding.ActivityRegisterBinding
+import com.eljeff.appfinalproject.model.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
@@ -141,16 +143,14 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("Register", "createUserWithEmail:success")
-                        val user = auth.currentUser
-                        goToLoginActivity()
+                        createUser(email)
+
 
                     } else {
                         var msg = ""
                         // If sign in fails, display a message to the user.
-                        if(task.exception?.localizedMessage == "createUserWithEmail:success"){
-                            msg = "Usuario registrado exitosamente."
-                        }
-                        else if(task.exception?.localizedMessage == "The email address is badly formatted."){
+
+                        if(task.exception?.localizedMessage == "The email address is badly formatted."){
                             msg = "El correo está mal escrito."
                         }
                         else if(task.exception?.localizedMessage == "The given password is invalid. [ Password should be at least 6 characters ]"){
@@ -171,6 +171,43 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
         }
+
+    }
+
+    private fun createUser(email: String) {
+        // Preguntamos por el id del usurario
+        val uid = auth.currentUser?.uid
+
+        // creamos el usuario
+        uid?.let { uid ->
+            val user = Users(
+                uid = uid,
+                name = "Jeferson",
+                email = email,
+                address = "123",
+                telephone = "456",
+                phone = "789",
+                score = 50
+            )
+
+            // Instanciamos la base de datos
+            val db = Firebase.firestore
+
+            // Add a new document with a generated ID
+            db.collection("users")
+                .add(user)
+                .addOnSuccessListener { documentReference ->
+                    Log.d("createInDB", "DocumentSnapshot added with ID: ${documentReference.id}")
+                    goToLoginActivity()
+                }
+                .addOnFailureListener { e ->
+                    Log.w("createInDB", "Error adding document", e)
+                }
+        }
+
+
+
+
 
     }
 
