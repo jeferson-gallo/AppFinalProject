@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/nav_purchase"
-        android:name="com.eljeff.appfinalproject.ui.purchase.PurchaseFragment"
+        android:name="com.eljeff.appfinalproject.PurchaseFragment"
         android:label="@string/title_purchase"
         tools:layout="@layout/fragment_purchase" />
     <fragment
         android:id="@+id/nav_cart"
-        android:name="com.eljeff.appfinalproject.ui.cart.CartFragment"
+        android:name="com.eljeff.appfinalproject.CartFragment"
         android:label="@string/title_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/nav_chat"
-        android:name="com.eljeff.appfinalproject.ui.chat.ChatFragment"
+        android:name="com.eljeff.appfinalproject.ChatFragment"
         android:label="@string/title_chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.eljeff.appfinalproject.ui.profile.ProfileFragment"
+        android:name="com.eljeff.appfinalproject.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 

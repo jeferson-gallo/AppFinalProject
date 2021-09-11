@@ -41,10 +41,4 @@
     <string name="cart_description">En este fragment se encontrán los productos que el usuario selecionó para la compra</string>
     <string name="chat_description">Este fragment será el medio de  comunicación entre el usuario y el vendedor, aquí se pude acordar el metodo de pago y el tipo de entrega de los productos.</string>
     <string name="profile_description">En este fragmento se encontraran todos los datos del usuario y una sección donde se califica al usuario según el numero de compras y deudas pendientes.</string>
-    <string name="input_address">Ingrese su dirección:</string>
-    <string name="address">Dirección</string>
-    <string name="input_telephone">Ingrese su numero de teléfono:</string>
-    <string name="telephone">Teléfono</string>
-    <string name="input_phone">Ingrese su numero de celular:</string>
-    <string name="phone">Número de celular</string>
 </resources>
