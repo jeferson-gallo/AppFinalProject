@@ -128,14 +128,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-
         val userName = registerBinding.userNameRegEdTx.text.toString()
         val email = registerBinding.emailRegEdTx.text.toString()
         val password = registerBinding.passwordRegEdTx.text.toString()
         val repPassword = registerBinding.confPasswordEdTx.text.toString()
-        val address = registerBinding.addressRegEdTx.text.toString()
-        val telephone = registerBinding.telephoneRgEdTx.text.toString()
-        val phone = registerBinding.phoneRegEdTx.text.toString()
 
         if(password != repPassword){
             Toast.makeText(this, "Las contraseñas deben ser iguales",
@@ -147,7 +143,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("Register", "createUserWithEmail:success")
-                        createUser(userName ,email, address, telephone, phone)
+                        createUser(email)
 
 
                     } else {
@@ -178,7 +174,7 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun createUser(userName: String, email: String, address: String, telephone: String, phone: String) {
+    private fun createUser(email: String) {
         // Preguntamos por el id del usurario
         val uid = auth.currentUser?.uid
 
@@ -186,12 +182,12 @@ class RegisterActivity : AppCompatActivity() {
         uid?.let { uid ->
             val user = Users(
                 uid = uid,
-                name = userName,
+                name = "Jeferson",
                 email = email,
-                address = address,
-                telephone = telephone,
-                phone = phone,
-                score = 0
+                address = "123",
+                telephone = "456",
+                phone = "789",
+                score = 50
             )
 
             // Instanciamos la base de datos
