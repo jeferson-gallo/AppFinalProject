@@ -35,81 +35,7 @@ class RegisterActivity : AppCompatActivity() {
             cleanErrors()
             registerUser()
 
-            /*
-            val userNameFrom = registerBinding.userNameRegEdTx.text.toString()
-            val emailFrom = registerBinding.emailRegEdTx.text.toString()
-            val passwordFrom = registerBinding.passwordRegEdTx.text.toString()
-            val confPasswordFrom = registerBinding.confPasswordEdTx.text.toString()
 
-            //# **************************************************************************************
-
-            // Verificamos campos vacios
-            val nameNotempty = userNameFrom.isNotEmpty()
-            val emailNotempty = emailFrom.isNotEmpty()
-            val passwNotempty = passwordFrom.isNotEmpty()
-            val confPasswNotempty = confPasswordFrom.isNotEmpty()
-            val acceptPassw = passwordFrom.length >= 6
-
-            //Si no se ingresa usuario
-            if(!nameNotempty){
-                registerBinding.userNameRegTxInpLay.error = getString(R.string.input_user_name_error)
-            }
-
-            //Si no se ingresa email
-            if(!emailNotempty){
-                registerBinding.emailRegTxInpLay.error = getString(R.string.input_email_error)
-            }
-
-            //Si no se ingresa contraseña
-            if(!passwNotempty){
-                registerBinding.passwordRegTxInpLay.error = getString(R.string.input_pasword_error)
-            }
-
-            //Si no se ingresan mas de 6 caracteres
-            if(!acceptPassw && passwNotempty){
-                registerBinding.passwordRegTxInpLay.error = getString(R.string.digit_min)
-            }
-
-            // Si se ingresan los 6 caracteres pero el campo de repetir está vacio
-            if(acceptPassw && !confPasswNotempty){
-                registerBinding.confPasswordRegTxInpLay.error = getString(R.string.repeat_password)
-            }
-
-            // Si se ingresan mas de 6, si no está vacio y si las contraseñas son iguales
-            if( (passwordFrom != confPasswordFrom) && acceptPassw && confPasswNotempty){
-                registerBinding.confPasswordRegTxInpLay.error = getString(R.string.password_not_equal)
-            }
-
-
-            val sent = nameNotempty && emailNotempty && acceptPassw && (passwordFrom == confPasswordFrom)
-
-            //# **************************************************************************************
-
-            if (sent) {
-                // asignamos datos del formulario
-                val user = User(
-                    userName = userNameFrom,
-                    email = emailFrom,
-                    password = passwordFrom
-                )
-
-                // Contenedor para tranferir datos entre actividades
-                val intent = Intent(this, LoginActivity::class.java)
-
-                // Mandar datos a otra actividad
-                intent.putExtra("user", user)
-
-                // Limpiamos la pila de actividades
-                intent.addFlags(
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                )
-
-                // LLamar actividad de login
-                startActivity(intent)
-            }
-
-             */
         }
 
         registerBinding.userNameRegEdTx.setOnClickListener {
@@ -128,10 +54,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
+
         val userName = registerBinding.userNameRegEdTx.text.toString()
         val email = registerBinding.emailRegEdTx.text.toString()
         val password = registerBinding.passwordRegEdTx.text.toString()
         val repPassword = registerBinding.confPasswordEdTx.text.toString()
+        val address = registerBinding.addressRegEdTx2.text.toString()
+        val telephone = registerBinding.telephoneRgEdTx2.text.toString()
+        val phone = registerBinding.phoneRegEdTx2.text.toString()
 
         if(password != repPassword){
             Toast.makeText(this, "Las contraseñas deben ser iguales",
@@ -143,7 +73,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("Register", "createUserWithEmail:success")
-                        createUser(email)
+                        createUser(userName ,email, address, telephone, phone)
 
 
                     } else {
@@ -174,7 +104,7 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun createUser(email: String) {
+    private fun createUser(userName: String, email: String, address: String, telephone: String, phone: String) {
         // Preguntamos por el id del usurario
         val uid = auth.currentUser?.uid
 
@@ -182,12 +112,12 @@ class RegisterActivity : AppCompatActivity() {
         uid?.let { uid ->
             val user = Users(
                 uid = uid,
-                name = "Jeferson",
+                name = userName,
                 email = email,
-                address = "123",
-                telephone = "456",
-                phone = "789",
-                score = 50
+                address = address,
+                telephone = telephone,
+                phone = phone,
+                score = 0
             )
 
             // Instanciamos la base de datos
