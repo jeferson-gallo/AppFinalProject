@@ -54,10 +54,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
+
         val userName = registerBinding.userNameRegEdTx.text.toString()
         val email = registerBinding.emailRegEdTx.text.toString()
         val password = registerBinding.passwordRegEdTx.text.toString()
         val repPassword = registerBinding.confPasswordEdTx.text.toString()
+        val address = registerBinding.addressRegEdTx2.text.toString()
+        val telephone = registerBinding.telephoneRgEdTx2.text.toString()
+        val phone = registerBinding.phoneRegEdTx2.text.toString()
 
         if(password != repPassword){
             Toast.makeText(this, "Las contraseñas deben ser iguales",
@@ -69,7 +73,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("Register", "createUserWithEmail:success")
-                        createUser(email)
+                        createUser(userName ,email, address, telephone, phone)
 
 
                     } else {
@@ -100,7 +104,7 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun createUser(email: String) {
+    private fun createUser(userName: String, email: String, address: String, telephone: String, phone: String) {
         // Preguntamos por el id del usurario
         val uid = auth.currentUser?.uid
 
@@ -108,12 +112,12 @@ class RegisterActivity : AppCompatActivity() {
         uid?.let { uid ->
             val user = Users(
                 uid = uid,
-                name = "Jeferson",
+                name = userName,
                 email = email,
-                address = "123",
-                telephone = "456",
-                phone = "789",
-                score = 50
+                address = address,
+                telephone = telephone,
+                phone = phone,
+                score = 0
             )
 
             // Instanciamos la base de datos
