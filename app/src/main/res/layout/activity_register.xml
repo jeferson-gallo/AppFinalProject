@@ -135,7 +135,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/address_reg_tx_vw"
+            android:id="@+id/address_reg_tx_vw_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -147,16 +147,16 @@
             app:layout_constraintTop_toBottomOf="@+id/conf_password_reg_tx_inp_lay" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/address_reg_tx_inp_lay"
+            android:id="@+id/address_reg_tx_inp_lay_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/address_reg_tx_vw">
+            app:layout_constraintTop_toBottomOf="@+id/address_reg_tx_vw_2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/address_reg_ed_tx"
+                android:id="@+id/address_reg_ed_tx_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background_layouts"
@@ -164,7 +164,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/telephone_reg_tx_vw"
+            android:id="@+id/telephone_reg_tx_vw_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -173,19 +173,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/address_reg_tx_inp_lay" />
+            app:layout_constraintTop_toBottomOf="@+id/address_reg_tx_inp_lay_2" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/telephone_reg_tx_inp_lay"
+            android:id="@+id/telephone_reg_tx_inp_lay_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/telephone_reg_tx_vw">
+            app:layout_constraintTop_toBottomOf="@+id/telephone_reg_tx_vw_2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/telephone_rg_ed_tx"
+                android:id="@+id/telephone_rg_ed_tx_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background_layouts"
@@ -193,7 +193,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/phone_reg_tx_vw"
+            android:id="@+id/phone_reg_tx_vw_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -202,19 +202,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/telephone_reg_tx_inp_lay" />
+            app:layout_constraintTop_toBottomOf="@+id/telephone_reg_tx_inp_lay_2" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone_reg_tx_inp_lay"
+            android:id="@+id/phone_reg_tx_inp_lay_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone_reg_tx_vw">
+            app:layout_constraintTop_toBottomOf="@+id/phone_reg_tx_vw_2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_reg_ed_tx"
+                android:id="@+id/phone_reg_ed_tx_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background_layouts"
@@ -232,7 +232,7 @@
             android:textColor="@color/primary_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone_reg_tx_inp_lay" />
+            app:layout_constraintTop_toBottomOf="@+id/phone_reg_tx_inp_lay_2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

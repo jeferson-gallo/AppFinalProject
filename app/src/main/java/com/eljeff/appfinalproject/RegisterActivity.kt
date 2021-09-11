@@ -59,9 +59,9 @@ class RegisterActivity : AppCompatActivity() {
         val email = registerBinding.emailRegEdTx.text.toString()
         val password = registerBinding.passwordRegEdTx.text.toString()
         val repPassword = registerBinding.confPasswordEdTx.text.toString()
-        val address = registerBinding.addressRegEdTx.text.toString()
-        val telephone = registerBinding.telephoneRgEdTx.text.toString()
-        val phone = registerBinding.phoneRegEdTx.text.toString()
+        val address = registerBinding.addressRegEdTx2.text.toString()
+        val telephone = registerBinding.telephoneRgEdTx2.text.toString()
+        val phone = registerBinding.phoneRegEdTx2.text.toString()
 
         if(password != repPassword){
             Toast.makeText(this, "Las contraseñas deben ser iguales",
