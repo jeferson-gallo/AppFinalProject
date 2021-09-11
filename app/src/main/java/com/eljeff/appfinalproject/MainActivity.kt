@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 
 class MainActivity : AppCompatActivity() {
+    //register completed
 
     //Hola
     //Hola develop
