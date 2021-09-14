@@ -47,4 +47,10 @@
     <string name="telephone">Número de teléfono</string>
     <string name="input_phone">Ingrese su número de celular:</string>
     <string name="phone">Número de celular</string>
+    <string name="rice_example">Arroz roa</string>
+    <string name="button_add_cart">add</string>
+    <string name="amount_example">Cantidad:</string>
+    <string name="cost_example">Precio: 4500$</string>
+    <string name="description_example">Descripción: 3KG - Roa el señor arroz de las señoras</string>
+    <string name="title_list_purchase">Lista de productos</string>
 </resources>

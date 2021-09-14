@@ -5,15 +5,72 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.eljeff.appfinalproject.R
+import com.eljeff.appfinalproject.data.server.ProductServer
+import com.eljeff.appfinalproject.databinding.CardViewProductsItemBinding
+import com.eljeff.appfinalproject.databinding.FragmentPurchaseBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 
 class PurchaseFragment : Fragment() {
 
+    //create binding
+    private var _binding: FragmentPurchaseBinding? = null
+    private val binding get() = _binding!!
+
+    private var _binding_card: CardViewProductsItemBinding? = null
+    private val binding_card get() = _binding_card!!
+
+    private lateinit var productAdapter: ProductAdapter
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_purchase, container, false)
+        _binding = FragmentPurchaseBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+        // inicializamos el adaptador
+        productAdapter = ProductAdapter( onItemClicked = { onDebtorItemClicked(it) } )
+        // configuramos el recycler view
+        binding.purchaseReciclerVw.apply {
+            layoutManager = LinearLayoutManager(this@PurchaseFragment.context)
+            adapter = productAdapter
+            setHasFixedSize(false)
+        }
+        //binding_card.purchaseAddCartBtt.setOnClickListener()
+
+        // cargamos la lista de productos desde la base de datos
+        loadFromServer()
+
+        return root
     }
+
+    private fun onDebtorItemClicked(product: ProductServer) {
+
+    }
+
+    private fun loadFromServer() {
+        val db = Firebase.firestore
+        db.collection("products").get().addOnSuccessListener { result ->
+
+            var listProducts: MutableList<ProductServer> = arrayListOf()
+
+            for (document in result){
+                listProducts.add(document.toObject<ProductServer>())
+            }
+            
+            productAdapter.appendItems(listProducts)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
+
