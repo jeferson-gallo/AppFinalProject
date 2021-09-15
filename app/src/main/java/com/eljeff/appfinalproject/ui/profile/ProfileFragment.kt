@@ -20,20 +20,24 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private var isSearching = true
 
+    private var idProduct: String? = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        var idDebtor: String? = ""
+
+
 
         binding.profileButton.setOnClickListener {
 
             val name = binding.userNameProEdTx.text.toString()
 
-            if (isSearching) { //actualizando
-                //searchInLocal(debtorDao, name, idDebtor)
+
+            if (isSearching) { //Buscando
+                //searchInLocal(debtorDao, name, idProduct)
                 val db = Firebase.firestore
 
                 db.collection("users").get().addOnSuccessListener { result ->
@@ -47,7 +51,7 @@ class ProfileFragment : Fragment() {
                         if (name == user.name) {
 
                             // guardamos el ID
-                            idDebtor = user.uid
+                            idProduct = user.id
 
                             debtorEsxist = true
 
@@ -64,6 +68,8 @@ class ProfileFragment : Fragment() {
                                 profileButton.text = getString(R.string.update)
                                 isSearching = false
 
+                                Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
+
                             }
                         }
                     }
@@ -72,7 +78,7 @@ class ProfileFragment : Fragment() {
                     }
                 }
             } else { // actualizando
-                //updateLocal(idDebtor, debtorDao)
+                //updateLocal(idProduct, debtorDao)
                 var documentUpdate = HashMap<String, Any>()
 
                 documentUpdate["name"] = binding.userNameProEdTx.text.toString()
@@ -81,7 +87,8 @@ class ProfileFragment : Fragment() {
                 documentUpdate["phone"] = binding.phoneProEdTx2.text.toString()
 
                 val db = Firebase.firestore
-                idDebtor?.let { id ->
+                Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
+                idProduct?.let { id ->
                     db.collection("users").document(id)
                         .update(documentUpdate).addOnSuccessListener {
                             Toast.makeText(requireContext(), "Usuario actualizado con exito", Toast.LENGTH_SHORT).show()
