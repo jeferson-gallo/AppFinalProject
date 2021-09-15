@@ -68,7 +68,7 @@ class ProfileFragment : Fragment() {
                                 profileButton.text = getString(R.string.update)
                                 isSearching = false
 
-                                Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
+                                //Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
 
                             }
                         }
@@ -87,7 +87,7 @@ class ProfileFragment : Fragment() {
                 documentUpdate["phone"] = binding.phoneProEdTx2.text.toString()
 
                 val db = Firebase.firestore
-                Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
                 idProduct?.let { id ->
                     db.collection("users").document(id)
                         .update(documentUpdate).addOnSuccessListener {
@@ -97,9 +97,20 @@ class ProfileFragment : Fragment() {
 
                 binding.profileButton.text = getString(R.string.search)
                 isSearching = true
-                //cleanWidgets()
+                cleanWidgets()
             }
         }
         return root
+    }
+
+    private fun cleanWidgets() {
+        with(binding){
+            profileScore.text = getString(R.string.score_1)
+            userNameProEdTx.setText("")
+            emailProEdTx.setText("")
+            addressProEdTx2.setText("")
+            telephoneProEdTx2.setText("")
+            phoneProEdTx2.setText("")
+        }
     }
 }
