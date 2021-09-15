@@ -51,7 +51,7 @@ class PurchaseFragment : Fragment() {
     }
 
     private fun onProductItemClicked(product: ProductServer) {
-        Toast.makeText(requireContext(), "Card Pulsado - " + product.name, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "agregado - " + product.name, Toast.LENGTH_SHORT).show()
     }
 
     private fun loadFromServer() {
