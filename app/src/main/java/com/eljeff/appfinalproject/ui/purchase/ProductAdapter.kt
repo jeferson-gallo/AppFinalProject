@@ -1,8 +1,11 @@
 package com.eljeff.appfinalproject.ui.purchase
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.eljeff.appfinalproject.R
@@ -26,7 +29,9 @@ class ProductAdapter(private val onItemClicked: (ProductServer) -> Unit):
         holder.bind(ListProduct[position])
 
         // con click al card view le manda el deudor a onItemClicked
-        holder.itemView.setOnClickListener { onItemClicked(ListProduct[position]) }
+        //holder.itemView.setOnClickListener { onItemClicked(ListProduct[position])  }
+        holder.itemView.setOnClickListener { onItemClicked(ListProduct[position])  }
+
     }
 
     override fun getItemCount(): Int {
@@ -54,7 +59,7 @@ class ProductAdapter(private val onItemClicked: (ProductServer) -> Unit):
                     Picasso.get().load(product.urlPicture).into(productImgVw)
                 }
             }
+
         }
     }
-
 }

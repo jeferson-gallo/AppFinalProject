@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eljeff.appfinalproject.R
 import com.eljeff.appfinalproject.data.server.ProductServer
@@ -34,14 +35,14 @@ class PurchaseFragment : Fragment() {
         val root: View = binding.root
 
         // inicializamos el adaptador
-        productAdapter = ProductAdapter( onItemClicked = { onDebtorItemClicked(it) } )
+        productAdapter = ProductAdapter( onItemClicked = { onProductItemClicked(it) } )
         // configuramos el recycler view
         binding.purchaseReciclerVw.apply {
             layoutManager = LinearLayoutManager(this@PurchaseFragment.context)
             adapter = productAdapter
             setHasFixedSize(false)
         }
-        //binding_card.purchaseAddCartBtt.setOnClickListener()
+
 
         // cargamos la lista de productos desde la base de datos
         loadFromServer()
@@ -49,8 +50,8 @@ class PurchaseFragment : Fragment() {
         return root
     }
 
-    private fun onDebtorItemClicked(product: ProductServer) {
-
+    private fun onProductItemClicked(product: ProductServer) {
+        Toast.makeText(requireContext(), "Card Pulsado - " + product.name, Toast.LENGTH_SHORT).show()
     }
 
     private fun loadFromServer() {
@@ -61,6 +62,7 @@ class PurchaseFragment : Fragment() {
 
             for (document in result){
                 listProducts.add(document.toObject<ProductServer>())
+
             }
             
             productAdapter.appendItems(listProducts)

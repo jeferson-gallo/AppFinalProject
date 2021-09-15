@@ -53,4 +53,9 @@
     <string name="cost_example">Precio: 4500$</string>
     <string name="description_example">Descripción: 3KG - Roa el señor arroz de las señoras</string>
     <string name="title_list_purchase">Lista de productos</string>
+    <string name="profile_title">Perfil de usuario</string>
+    <string name="search">Buscar</string>
+    <string name="score_1">Puntaje del cliente</string>
+    <string name="score_2">Puntaje del cliente: %s</string>
+    <string name="update">Actualizar</string>
 </resources>
