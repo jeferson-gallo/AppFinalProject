@@ -1,16 +1,15 @@
 package com.eljeff.appfinalproject.ui.purchase
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eljeff.appfinalproject.R
 import com.eljeff.appfinalproject.data.server.ProductServer
-import com.eljeff.appfinalproject.databinding.CardViewProductsItemBinding
 import com.eljeff.appfinalproject.databinding.FragmentPurchaseBinding
+import com.eljeff.appfinalproject.model.Users
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -20,9 +19,6 @@ class PurchaseFragment : Fragment() {
     //create binding
     private var _binding: FragmentPurchaseBinding? = null
     private val binding get() = _binding!!
-
-    private var _binding_card: CardViewProductsItemBinding? = null
-    private val binding_card get() = _binding_card!!
 
     private lateinit var productAdapter: ProductAdapter
 
@@ -35,7 +31,7 @@ class PurchaseFragment : Fragment() {
         val root: View = binding.root
 
         // inicializamos el adaptador
-        productAdapter = ProductAdapter( onItemClicked = { onProductItemClicked(it) } )
+        productAdapter = ProductAdapter(onItemClicked = { onProductItemClicked(it) } )
         // configuramos el recycler view
         binding.purchaseReciclerVw.apply {
             layoutManager = LinearLayoutManager(this@PurchaseFragment.context)
@@ -51,6 +47,12 @@ class PurchaseFragment : Fragment() {
     }
 
     private fun onProductItemClicked(product: ProductServer) {
+
+        // Instanciamos la base de datos
+        val db = Firebase.firestore
+        // Add a new document with a generated ID
+        product.id?.let {id -> db.collection("cart_list").document(id).set(product) }
+
         Toast.makeText(requireContext(), "agregado - " + product.name, Toast.LENGTH_SHORT).show()
     }
 
@@ -60,11 +62,11 @@ class PurchaseFragment : Fragment() {
 
             var listProducts: MutableList<ProductServer> = arrayListOf()
 
-            for (document in result){
+            for (document in result) {
                 listProducts.add(document.toObject<ProductServer>())
 
             }
-            
+
             productAdapter.appendItems(listProducts)
         }
     }
