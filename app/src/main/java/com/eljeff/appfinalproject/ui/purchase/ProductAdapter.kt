@@ -17,7 +17,8 @@ class ProductAdapter(
 
     // me dice cual car view o layout quiero pintar
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_products_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_products_item,
+            parent, false)
 
         return ViewHolder(view, onItemClicked)
     }
