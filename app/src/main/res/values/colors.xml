@@ -9,6 +9,7 @@
     <color name="background">#212121</color>
     <color name="background_layouts">#9E9E9E</color>
     <color name="background_nav">#616161</color>
+    <color name="score_color">#FFC400</color>
 
     <!-- Colores en escala de grises -->
     <color name="gray_900">#212121</color>

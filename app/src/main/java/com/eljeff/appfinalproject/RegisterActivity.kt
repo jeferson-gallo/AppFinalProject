@@ -106,33 +106,30 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun createUser(userName: String, email: String, address: String, telephone: String, phone: String) {
         // Preguntamos por el id del usurario
-        val uid = auth.currentUser?.uid
+        val id = auth.currentUser?.uid
 
         // creamos el usuario
-        uid?.let { uid ->
+        id?.let { id ->
             val user = Users(
-                uid = uid,
+                id = id,
                 name = userName,
                 email = email,
                 address = address,
                 telephone = telephone,
                 phone = phone,
-                score = 0
+                score = 100
             )
 
             // Instanciamos la base de datos
             val db = Firebase.firestore
 
             // Add a new document with a generated ID
-            db.collection("users")
-                .add(user)
-                .addOnSuccessListener { documentReference ->
-                    Log.d("createInDB", "DocumentSnapshot added with ID: ${documentReference.id}")
-                    goToLoginActivity()
-                }
-                .addOnFailureListener { e ->
-                    Log.w("createInDB", "Error adding document", e)
-                }
+            db.collection("users").document(id).set(user)
+
+            Toast.makeText(this, "Usuario creado con exito",Toast.LENGTH_SHORT).show()
+
+            goToLoginActivity()
+
         }
 
 

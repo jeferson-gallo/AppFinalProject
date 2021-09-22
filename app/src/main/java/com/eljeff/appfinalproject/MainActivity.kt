@@ -1,6 +1,10 @@
 package com.eljeff.appfinalproject
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -27,5 +31,34 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    // agregamos el menú overflow a el appbar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    // cuando se selecciona un item
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // cerrar sesión
+        if(item.itemId == R.id.logout_menu){
+            Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show()
+            goToLoginActivity()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun goToLoginActivity() {
+        // Contenedor para tranferir datos entre actividades
+        val intent = Intent(this, LoginActivity::class.java)
+
+        // Limpiamos la pila de actividades
+        intent.addFlags(
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        )
+
+        // LLamar actividad de login
+        startActivity(intent)
     }
 }
