@@ -58,4 +58,7 @@
     <string name="score_1">Puntaje del cliente</string>
     <string name="score_2">Puntaje del cliente: %s</string>
     <string name="update">Actualizar</string>
+    <string name="amount_products"># de productos</string>
+    <string name="button_delete_cart">Quitar</string>
+    <string name="title_cart_frag">Productos seleccionados</string>
 </resources>
