@@ -2,12 +2,16 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id 'kotlin-android-extensions'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    /*androidExtensions {
+        experimental = true
+    }*/
     defaultConfig {
         applicationId "com.eljeff.appfinalproject"
         minSdkVersion 21
@@ -53,6 +57,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     implementation 'com.google.firebase:firebase-firestore-ktx:23.0.3'
+    implementation 'com.github.lisawray.groupie:groupie:2.10.0'
 
     implementation 'com.squareup.picasso:picasso:2.8'
 
