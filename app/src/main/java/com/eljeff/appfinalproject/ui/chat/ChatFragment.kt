@@ -50,8 +50,6 @@ class ChatFragment : Fragment() {
         _binding = FragmentChatBinding.inflate(inflater, container, false)
         val root: View = binding.root
         auth = Firebase.auth
-
-
         adapter = GroupieAdapter()
 
 
@@ -121,7 +119,9 @@ class ChatFragment : Fragment() {
 
             }
             binding.chatRecyclerView.adapter = adapter
-            binding.chatRecyclerView.smoothScrollToPosition(adapter.itemCount-1)
+            Log.d("Tamaño Vacio", adapter.itemCount.toString())
+            if (adapter.itemCount > 0) binding.chatRecyclerView.smoothScrollToPosition(adapter.itemCount-1)
+
             //chatAdapter.appendItems(listMessages)
         }
         //Pruebas de Query Get
