@@ -6,3 +6,7 @@ fun emailValidator(text: String): Boolean {
     val pattern = Patterns.EMAIL_ADDRESS
     return pattern.matcher(text).matches()
 }
+
+fun notEmpty(text: String): Boolean {
+    return text.isNotEmpty()
+}

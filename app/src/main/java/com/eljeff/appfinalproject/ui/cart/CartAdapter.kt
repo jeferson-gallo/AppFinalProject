@@ -37,7 +37,7 @@ class CartAdapter(
         notifyDataSetChanged()
     }
 
-    class ViewHolder(view: View, var onItemClicked: (ProductServer) -> Unit ): RecyclerView.ViewHolder(view){
+    class ViewHolder(view: View, var onItemClicked: (ProductServer) -> Unit): RecyclerView.ViewHolder(view){
 
         private val binding = CardViewCartItemBinding.bind(view)
 
