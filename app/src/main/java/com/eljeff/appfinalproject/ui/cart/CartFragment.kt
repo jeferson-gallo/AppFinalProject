@@ -55,16 +55,17 @@ class CartFragment : Fragment() {
     private fun loadFromServer() {
         val db = Firebase.firestore
         val id = auth.currentUser?.uid
-
-        db.collection("cart_list").get().addOnSuccessListener { result ->
+        val nameCollection:String = ("cart_list"+"_"+id.toString())
+        db.collection(nameCollection).get().addOnSuccessListener { result ->
 
             var listProducts: MutableList<ProductServer> = arrayListOf()
 
             for (document in result){
                 val product: ProductServer = document.toObject<ProductServer>()
-                if (product.id == id) {
+                listProducts.add(product)
+                /*if (product.id == id) {
                     listProducts.add(product)
-                }
+                }*/
             }
             cartAdapter.appendItems(listProducts)
         }
@@ -83,12 +84,16 @@ class CartFragment : Fragment() {
 
         val db = Firebase.firestore
         val id = auth.currentUser?.uid
-
+        val nameCollection:String = ("cart_list"+"_"+id.toString())
         // ********************* delete viejo ******************
-        val nmId: String = (name+"_"+id.toString())
+        name?.let {name -> db.collection(nameCollection).document(name).delete() }
+
+        /*val nmId: String = (name+"_"+id.toString())
         nmId?.let { id ->
-            db.collection("cart_list").document(id).delete()
-        }
+            db.collection(nameCollection).document(name).delete()
+        }*/
+
+        //Actualizar lista
         loadFromServer()
 
         // ********************* delete viejo ******************
