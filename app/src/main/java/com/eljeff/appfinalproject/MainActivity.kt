@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +43,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // cerrar sesión
         if(item.itemId == R.id.logout_menu){
+            //Cerramos sesión en firebase
+            FirebaseAuth.getInstance().signOut()
+
             Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show()
             goToLoginActivity()
         }

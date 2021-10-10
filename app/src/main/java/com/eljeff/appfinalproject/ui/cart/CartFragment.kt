@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eljeff.appfinalproject.data.server.ProductServer
 import com.eljeff.appfinalproject.databinding.FragmentCartBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -20,6 +22,9 @@ class CartFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var cartAdapter: CartAdapter
+
+    //inicialir firebase
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +43,9 @@ class CartFragment : Fragment() {
             setHasFixedSize(false)
         }
 
+        //Firebase
+        auth = Firebase.auth
+
         // cargamos carrito de la base de datos
         loadFromServer()
 
@@ -46,13 +54,17 @@ class CartFragment : Fragment() {
 
     private fun loadFromServer() {
         val db = Firebase.firestore
+        val id = auth.currentUser?.uid
+
         db.collection("cart_list").get().addOnSuccessListener { result ->
 
             var listProducts: MutableList<ProductServer> = arrayListOf()
 
             for (document in result){
-                listProducts.add(document.toObject<ProductServer>())
-
+                val product: ProductServer = document.toObject<ProductServer>()
+                if (product.id == id) {
+                    listProducts.add(product)
+                }
             }
             cartAdapter.appendItems(listProducts)
         }
@@ -68,18 +80,31 @@ class CartFragment : Fragment() {
     }
 
     private fun deleteProductFromCart(name: String?) {
+
         val db = Firebase.firestore
-        db.collection("cart_list").get().addOnSuccessListener { result ->
+        val id = auth.currentUser?.uid
+
+        // ********************* delete viejo ******************
+        val nmId: String = (name+"_"+id.toString())
+        nmId?.let { id ->
+            db.collection("cart_list").document(id).delete()
+        }
+        loadFromServer()
+
+        // ********************* delete viejo ******************
+        /*db.collection("cart_list").get().addOnSuccessListener { result ->
             for (document in result) {
                 val product: ProductServer = document.toObject<ProductServer>()
-                if (name == product.name) {
-                    product.id?.let { id ->
+
+                val nmId: String = (product.name.toString()+"_"+id.toString())
+
+                if (name == product.name.toString()) {
+                    nmId?.let { id ->
                         db.collection("cart_list").document(id).delete()
                     }
-
                 }
                 loadFromServer()
             }
-        }
+        }*/
     }
 }
