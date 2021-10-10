@@ -61,9 +61,11 @@ class PurchaseFragment : Fragment() {
         val db = Firebase.firestore
 
         val nmId: String = (product.name.toString()+"_"+id.toString())
-
+        val nameCollection:String = ("cart_list"+"_"+id.toString())
         //**************** nuevo *****************
-        nmId?.let {id -> db.collection("cart_list").document(id).set(product) }
+        db.collection(nameCollection).document(product.name.toString()).set(product)
+
+        //nmId?.let {id -> db.collection(nameCollection).document(product.name.toString()).set(product) }
         //**************** Antiguo *****************
 
         // Add a new document with a generated ID
@@ -71,10 +73,10 @@ class PurchaseFragment : Fragment() {
 
 
         // cambiarle el ID al producto
-        var documentUpdate = HashMap<String, Any>()
+        /*var documentUpdate = HashMap<String, Any>()
         documentUpdate["id"] = id.toString()
         db.collection("cart_list").document(nmId).update(documentUpdate)
-
+        */
         updateAmount()
 
         Toast.makeText(requireContext(), "agregado - " + product.name, Toast.LENGTH_SHORT).show()
