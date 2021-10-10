@@ -32,75 +32,84 @@ class ProfileFragment : Fragment() {
 
 
         binding.profileButton.setOnClickListener {
+            updateProfile()
 
-            val name = binding.userNameProEdTx.text.toString()
-
-
-            if (isSearching) { //Buscando
-                //searchInLocal(debtorDao, name, idProduct)
-                val db = Firebase.firestore
-
-                db.collection("users").get().addOnSuccessListener { result ->
-
-                    var debtorEsxist = false
-
-                    for (document in result) {
-
-                        val user: Users = document.toObject<Users>()
-
-                        if (name == user.name) {
-
-                            // guardamos el ID
-                            idProduct = user.id
-
-                            debtorEsxist = true
-
-                            with(binding) {
-
-                                // campos
-                                emailProEdTx.setText(user.email)
-                                addressProEdTx2.setText(user.address)
-                                telephoneProEdTx2.setText(user.telephone)
-                                phoneProEdTx2.setText(user.phone)
-                                profileScore.text = getString(R.string.score_2, user.score.toString())
-
-                                // boton
-                                profileButton.text = getString(R.string.update)
-                                isSearching = false
-
-                                //Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
-
-                            }
-                        }
-                    }
-                    if (!debtorEsxist) {
-                        Toast.makeText(requireContext(), "El Usuario no existe", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            } else { // actualizando
-                //updateLocal(idProduct, debtorDao)
-                var documentUpdate = HashMap<String, Any>()
-
-                documentUpdate["name"] = binding.userNameProEdTx.text.toString()
-                documentUpdate["address"] = binding.addressProEdTx2.text.toString()
-                documentUpdate["telephone"] = binding.telephoneProEdTx2.text.toString()
-                documentUpdate["phone"] = binding.phoneProEdTx2.text.toString()
-
-                val db = Firebase.firestore
-                //Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
-                idProduct?.let { id ->
-                    db.collection("users").document(id)
-                        .update(documentUpdate).addOnSuccessListener {
-                            Toast.makeText(requireContext(), "Usuario actualizado con exito", Toast.LENGTH_SHORT).show()
-                        }
-                }
-
-                binding.profileButton.text = getString(R.string.search)
-                isSearching = true
-                cleanWidgets()
-            }
         }
         return root
+    }
+
+    private fun updateProfile() {
+        val name = binding.userNameProEdTx.text.toString()
+        if (isSearching) { //Buscando
+            //searchInLocal(debtorDao, name, idProduct)
+            searchUser(name)
+        } else { // actualizando
+            //updateLocal(idProduct, debtorDao)
+            updateFields()
+            binding.profileButton.text = getString(R.string.search)
+            isSearching = true
+            cleanWidgets()
+        }
+    }
+
+    private fun searchUser(name : String) {
+        val db = Firebase.firestore
+
+        db.collection("users").get().addOnSuccessListener { result ->
+
+            var debtorEsxist = false
+
+            for (document in result) {
+
+                val user: Users = document.toObject<Users>()
+
+                if (name == user.name) {
+
+                    // guardamos el ID
+                    idProduct = user.id
+
+                    debtorEsxist = true
+
+                    with(binding) {
+
+                        // campos
+                        emailProEdTx.setText(user.email)
+                        addressProEdTx2.setText(user.address)
+                        telephoneProEdTx2.setText(user.telephone)
+                        phoneProEdTx2.setText(user.phone)
+                        profileScore.text = getString(R.string.score_2, user.score.toString())
+
+                        // boton
+                        profileButton.text = getString(R.string.update)
+                        isSearching = false
+
+                        //Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+            if (!debtorEsxist) {
+                Toast.makeText(requireContext(), "El Usuario no existe", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun updateFields() {
+        var documentUpdate = HashMap<String, Any>()
+
+        documentUpdate["name"] = binding.userNameProEdTx.text.toString()
+        documentUpdate["address"] = binding.addressProEdTx2.text.toString()
+        documentUpdate["telephone"] = binding.telephoneProEdTx2.text.toString()
+        documentUpdate["phone"] = binding.phoneProEdTx2.text.toString()
+
+        val db = Firebase.firestore
+        //Toast.makeText(requireContext(), "User: "+idProduct, Toast.LENGTH_SHORT).show()
+        idProduct?.let { id ->
+            db.collection("users").document(id)
+                .update(documentUpdate).addOnSuccessListener {
+                    Toast.makeText(requireContext(), "Usuario actualizado con exito", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
     private fun cleanWidgets() {

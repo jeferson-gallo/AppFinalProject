@@ -63,4 +63,6 @@
     <string name="title_cart_frag">Productos seleccionados</string>
     <string name="message_example">Mensaje del chat Ejemplo</string>
     <string name="write_message">Escribe un mensaje...</string>
+    <string name="profile_item_example">Nombre</string>
+    <string name="profile_name_example">Javier Andres Mosquera</string>
 </resources>

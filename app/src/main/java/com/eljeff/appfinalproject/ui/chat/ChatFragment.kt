@@ -51,6 +51,7 @@ class ChatFragment : Fragment() {
         val root: View = binding.root
         auth = Firebase.auth
 
+
         adapter = GroupieAdapter()
 
 
@@ -102,8 +103,8 @@ class ChatFragment : Fragment() {
 
 
         val db = Firebase.firestore
-        db.collection("chats").orderBy("id").get().addOnSuccessListener { result ->
-
+        //db.collection("chats").orderBy("id").get().addOnSuccessListener { result ->
+        db.collection("chats").get().addOnSuccessListener { result ->
             //var listMessages: MutableList<MessageServer> = arrayListOf()
 
             for (document in result){
@@ -123,6 +124,9 @@ class ChatFragment : Fragment() {
             binding.chatRecyclerView.smoothScrollToPosition(adapter.itemCount-1)
             //chatAdapter.appendItems(listMessages)
         }
+        //Pruebas de Query Get
+       // val messag = db.collection("users").whereEqualTo("id","lqEO2vwXjibiE7IRD4PgrnhxxdB3")
+
     }
 
 
