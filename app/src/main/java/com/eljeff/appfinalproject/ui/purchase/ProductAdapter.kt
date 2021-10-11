@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eljeff.appfinalproject.R
 import com.eljeff.appfinalproject.data.server.ProductServer
 import com.eljeff.appfinalproject.databinding.CardViewProductsItemBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 
 class ProductAdapter(
@@ -50,9 +54,27 @@ class ProductAdapter(
         fun bind(product: ProductServer){
             with(binding){
 
-                purchaseCostTxVw.text = ("Precio: " + product.cost.toString() + "$")
+                // Instanciamos la base de datos
+                /*val db = Firebase.firestore
+                val auth: FirebaseAuth = Firebase.auth
+                val id = auth.currentUser?.uid
+                val nameCollection:String = ("cart_list"+"_"+id.toString())
+                val nameProduct = product.name
+
+                // cantidad
+                var documentUpdate = HashMap<String, Any>()
+                documentUpdate["amount"] = 1
+
+                nameProduct?.let {
+                        nameProduct -> db.collection(nameCollection).document(nameProduct)
+                        .update(documentUpdate)
+                }*/
+
+
+                purchaseCostTxVw.text = ("Precio: " + product.cost + "$")
                 purchaseDescriptionTxVw.text = ("Descripción: " + product.description)
                 purchaseProductNameTxVw.text = product.name
+                purchaseAmountEdTx.setText(product.amount)
 
                 if(product.urlPicture != null){
                     Picasso.get().load(product.urlPicture).into(productImgVw)
@@ -60,7 +82,39 @@ class ProductAdapter(
                 // Boton agregar
                 purchaseAddCartBtt.setOnClickListener {
 
+                    // Instanciamos la base de datos
+                    /*val db = Firebase.firestore
+                    val auth: FirebaseAuth = Firebase.auth
+                    val id = auth.currentUser?.uid
+                    val nameCollection:String = ("cart_list"+"_"+id.toString())
+                    val nameProduct = product.name
+
+                    var amount = binding.purchaseAmountEdTx.text.toString()
+                    if(amount.isEmpty()){
+                        amount = "1"
+                    }
+
+                    // cantidad
+                    var documentUpdate = HashMap<String, Any>()
+                    documentUpdate["amount"] = amount.toInt()
+                    nameProduct?.let {
+                            nameProduct -> db.collection(nameCollection).document(nameProduct)
+                        .update(documentUpdate)
+                    }*/
+
+                    var amount = binding.purchaseAmountEdTx.text.toString()
+                    if(amount.isEmpty()){
+                        amount = "1"
+                    }
+                    /*val selectedProduct: ProductServer = ProductServer(
+                        id = product.id,
+                        name = product.name,
+                        amount = amount,
+                        description = product.description,
+                        urlPicture = product.urlPicture
+                    )*/
                     onItemClicked(product)
+
                 }
 
             }

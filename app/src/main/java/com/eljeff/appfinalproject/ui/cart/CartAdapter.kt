@@ -45,7 +45,7 @@ class CartAdapter(
         fun bind(product: ProductServer){
             with(binding){
 
-                cartCostTxVw.text = ("Precio: " + product.cost.toString() + "$")
+                cartCostTxVw.text = ("Precio: " + product.cost + "$")
                 cartDescriptionTxVw.text = ("Descripción: " + product.description)
                 cartProductNameTxVw.text = product.name
 

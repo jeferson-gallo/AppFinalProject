@@ -49,7 +49,32 @@ class CartFragment : Fragment() {
         // cargamos carrito de la base de datos
         loadFromServer()
 
+        // actializamos precio total
+        updateAmount()
+
         return  root
+    }
+
+    private fun updateAmount() {
+        val db = Firebase.firestore
+        val id = auth.currentUser?.uid
+        val nameCollection:String = ("cart_list"+"_"+id.toString())
+
+        db.collection(nameCollection).get().addOnSuccessListener { result ->
+
+            var total: Double = 0.0
+
+            for (document in result){
+                val product: ProductServer = document.toObject<ProductServer>()
+                val costProduct = product.cost?.toDouble()
+                total = total + costProduct!!
+
+            }
+            val totalSatring = "Comprar: " + String.format("%.3f",total) + "$"
+            //val totalSatring = "Total: " + total.toString() + "$"
+
+            binding.buyButton.text = totalSatring
+        }
     }
 
     private fun loadFromServer() {
@@ -76,7 +101,14 @@ class CartFragment : Fragment() {
         val nameProduct: String? = product.name
         deleteProductFromCart(nameProduct)
 
+        //Actualizar lista
+        loadFromServer()
+        //Actualizar total
+        updateAmount()
+
         Toast.makeText(requireContext(), "Eliminado - " + product.name, Toast.LENGTH_SHORT).show()
+
+
 
     }
 
@@ -93,8 +125,6 @@ class CartFragment : Fragment() {
             db.collection(nameCollection).document(name).delete()
         }*/
 
-        //Actualizar lista
-        loadFromServer()
 
         // ********************* delete viejo ******************
         /*db.collection("cart_list").get().addOnSuccessListener { result ->
