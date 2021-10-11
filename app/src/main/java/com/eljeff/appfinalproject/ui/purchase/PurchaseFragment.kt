@@ -98,9 +98,9 @@ class PurchaseFragment : Fragment() {
             for (document in result){
                 val product: ProductServer = document.toObject<ProductServer>()
                 val costProduct = product.cost?.toDouble()
-                //val amount = product.amount?.toDouble()
-                //Log.d("amount", amount.toString())
-                total += (costProduct!!)
+                val amount = product.amount?.toDouble()
+                //Log.d("amount", String.format("%.3f",amount))
+                total += (costProduct!! * amount!!)
 
             }
 

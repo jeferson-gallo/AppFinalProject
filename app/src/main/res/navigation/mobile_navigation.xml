@@ -14,7 +14,11 @@
         android:id="@+id/nav_cart"
         android:name="com.eljeff.appfinalproject.ui.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_nav_cart_to_nav_chat"
+            app:destination="@id/nav_chat" />
+    </fragment>
     <fragment
         android:id="@+id/nav_chat"
         android:name="com.eljeff.appfinalproject.ui.chat.ChatFragment"

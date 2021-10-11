@@ -1,12 +1,15 @@
 package com.eljeff.appfinalproject.ui.cart
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.system.Os.accept
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eljeff.appfinalproject.R
 import com.eljeff.appfinalproject.data.server.ProductServer
 import com.eljeff.appfinalproject.databinding.FragmentCartBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +28,8 @@ class CartFragment : Fragment() {
 
     //inicialir firebase
     private lateinit var auth: FirebaseAuth
+
+    private var total: Double = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +57,31 @@ class CartFragment : Fragment() {
         // actializamos precio total
         updateAmount()
 
+        binding.buyButton.setOnClickListener {
+
+            // crear cuadro de alerta
+            val alertDialog: AlertDialog? = activity?.let {
+                val builder = AlertDialog.Builder(it)
+                builder.apply {
+                    setMessage("¿Desea realizar la compra por un monto de: " + String.format("%.3f",total) + "$ ?")
+                    setPositiveButton(R.string.accept) { dialog, id ->
+                    }
+
+                    setNegativeButton(R.string.cancel) { dialog, id ->
+                    }
+                }
+                builder.create()
+            }
+            alertDialog?.show()
+        }
+
         return  root
+    }
+
+    private fun resumePurchase() {
+        val db = Firebase.firestore
+        val id = auth.currentUser?.uid
+        val nameCollection:String = ("cart_list"+"_"+id.toString())
     }
 
     private fun updateAmount() {
@@ -62,12 +91,14 @@ class CartFragment : Fragment() {
 
         db.collection(nameCollection).get().addOnSuccessListener { result ->
 
-            var total: Double = 0.0
+            total = 0.0
 
             for (document in result){
                 val product: ProductServer = document.toObject<ProductServer>()
                 val costProduct = product.cost?.toDouble()
-                total = total + costProduct!!
+                val amount = product.amount?.toDouble()
+                //Log.d("amount", String.format("%.3f",amount))
+                total += (costProduct!! * amount!!)
 
             }
             val totalSatring = "Comprar: " + String.format("%.3f",total) + "$"

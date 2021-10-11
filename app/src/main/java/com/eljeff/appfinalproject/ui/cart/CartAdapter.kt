@@ -48,6 +48,7 @@ class CartAdapter(
                 cartCostTxVw.text = ("Precio: " + product.cost + "$")
                 cartDescriptionTxVw.text = ("Descripción: " + product.description)
                 cartProductNameTxVw.text = product.name
+                cartAmountEdTx.setText(product.amount)
 
                 if(product.urlPicture != null){
                     Picasso.get().load(product.urlPicture).into(cartProductImgVw)
