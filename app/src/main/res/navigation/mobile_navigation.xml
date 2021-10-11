@@ -32,7 +32,15 @@
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.eljeff.appfinalproject.ui.profile.ProfileFragment"
-        android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        android:label="@string/title_profile">
+        <action
+            android:id="@+id/action_nav_profile_to_profileEditorFragment"
+            app:destination="@id/profileEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditorFragment"
+        android:name="com.eljeff.appfinalproject.ui.profile.ProfileEditorFragment"
+        android:label="Actualizar"
+        tools:layout="@layout/fragment_profile"/>
 
 </navigation>

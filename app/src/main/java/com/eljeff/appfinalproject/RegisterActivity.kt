@@ -107,7 +107,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun createUser(userName: String, email: String, address: String, telephone: String, phone: String) {
         // Preguntamos por el id del usurario
         val id = auth.currentUser?.uid
-
+        val uri= "https://firebasestorage.googleapis.com/v0/b/appfinalproject-b2c62.appspot.com/o/profile_images%2Fdefault_image.png?alt=media&token=222d2d72-5c50-4fdb-8ccc-983d7e707dbc"
         // creamos el usuario
         id?.let { id ->
             val user = Users(
@@ -117,7 +117,8 @@ class RegisterActivity : AppCompatActivity() {
                 address = address,
                 telephone = telephone,
                 phone = phone,
-                score = 100
+                score = 100,
+                urlImage = uri
             )
 
             // Instanciamos la base de datos
