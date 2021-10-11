@@ -14,9 +14,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import kotlinx.android.synthetic.main.card_view_profile_header.view.*
 import kotlinx.android.synthetic.main.card_view_profile_item.view.*
 
 class ProfileFragment : Fragment() {
@@ -31,6 +33,8 @@ class ProfileFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var adapter: GroupieAdapter
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,14 +56,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setProfileFields(userInfo : Users) {
-        Log.d("Setting Propertys", "")
-        Log.d("Nombre de Usuario", userInfo?.name.toString())
-        Log.d("Dirección", userInfo?.address.toString())
-        adapter.add(ProfileField("Nombre de Usuario", userInfo?.name.toString()))
-        adapter.add(ProfileField("Correo electrónico", userInfo?.email.toString()))
-        adapter.add(ProfileField("Celular", userInfo?.phone.toString()))
-        adapter.add(ProfileField("Teléfono", userInfo?.telephone.toString()))
-        adapter.add(ProfileField("Dirección", userInfo?.address.toString()))
+        adapter.add(HeaderField(userInfo))
+        adapter.add(ProfileField("Nombre de Usuario", userInfo.name.toString()))
+        adapter.add(ProfileField("Correo electrónico", userInfo.email.toString()))
+        adapter.add(ProfileField("Celular", userInfo.phone.toString()))
+        adapter.add(ProfileField("Teléfono", userInfo.telephone.toString()))
+        adapter.add(ProfileField("Dirección", userInfo.address.toString()))
         binding.profileRecyclerView.adapter = adapter
     }
 
@@ -163,6 +165,29 @@ class ProfileFragment : Fragment() {
             phoneProEdTx2.setText("")
         }
     }*/
+}
+class HeaderField (private val user : Users): Item<GroupieViewHolder>() {
+    companion object{
+        const val TAG = "HEADER FIELD CLASS"
+    }
+
+    override fun bind(p0: GroupieViewHolder, p1: Int) {
+        val uri = user.urlImage
+        val targetImageView = p0.itemView.profile_image_view
+        Picasso.get().load(uri).into(targetImageView)
+        p0.itemView.name_text_view.text = user.name
+        p0.itemView.score_text_view.text = user.score.toString()
+
+        p0.itemView.profile_image_view.setOnClickListener{
+            Log.d(TAG, "Cambiando foto de perfil.")
+        }
+
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.card_view_profile_header
+    }
+
 }
 
 class ProfileField (private val field: String,private val value: String): Item<GroupieViewHolder>() {

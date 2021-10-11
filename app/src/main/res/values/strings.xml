@@ -66,4 +66,6 @@
     <string name="profile_item_example">Nombre</string>
     <string name="profile_name_example">Javier Andres Mosquera</string>
     <string name="total">Total: 0$</string>
+    <string name="user_name_example">Javier Andres Mosquera</string>
+    <string name="score_example">10.000</string>
 </resources>

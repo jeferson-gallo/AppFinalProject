@@ -7,5 +7,6 @@ data class Users(
     var address : String? = null,
     var telephone : String? = null,
     var phone : String? = null,
-    var score : Long? = null
+    var score : Long? = null,
+    var urlImage : String? = null
 )
