@@ -50,7 +50,8 @@ class ProfileFragment : Fragment() {
         loadUser()
 
         binding.updateButton.setOnClickListener {
-            //findNavController().navigate(Profile)
+            //findNavController().navigate(CartFragmentDirections.actionNavCartToNavChat(true))
+            findNavController().navigate(ProfileFragmentDirections.actionNavProfileToProfileEditorFragment())
 
         }
         return binding.root
