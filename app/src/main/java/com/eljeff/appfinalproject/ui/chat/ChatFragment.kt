@@ -66,8 +66,6 @@ class ChatFragment : Fragment() {
         }
 
 
-
-
         return  root
     }
 
@@ -104,6 +102,10 @@ class ChatFragment : Fragment() {
         else if (message == "Ok" || message == "ok" || message == "OK"){
             answer = "Gracias por tu compra. Feliz resto de dia."
             able = false
+
+            deleteLista()
+
+
         }
         else{
             answer = "Opcion no valida."
@@ -113,63 +115,86 @@ class ChatFragment : Fragment() {
         else updateToView(answer)
     }
 
-    private fun uploadMessage(message : String) {
-        val from = auth.currentUser?.uid
-        val to = "Admin"
-        val boolVal = false
+    private fun deleteLista() {
         val db = Firebase.firestore
-        val document = db.collection("chats").document()
-        //val id = document.id
-        val id = getCurrentDateTime()
-        val message = MessageServer(id,from,to,message,boolVal,true,boolVal)
-        db.collection("chats").document(id).set(message)
-    }
+        val id = auth.currentUser?.uid
+        val nameCollection: String = ("cart_list" + "_" + id.toString())
 
-    private fun updateFromView(message: String) {
-        with(binding){
-            messageInputEditText.setText("")
-            adapter.add(ChatFromItem(message))
-            chatRecyclerView.smoothScrollToPosition(adapter.itemCount-1)
-        }
-    }
-    private fun updateToView(message: String) {
-        with(binding){
-            messageInputEditText.setText("")
-            adapter.add(ChatToItem(message))
-            chatRecyclerView.smoothScrollToPosition(adapter.itemCount-1)
+        db.collection(nameCollection).get().addOnSuccessListener { result ->
+
+
+            for (document in result) {
+                val product: ProductServer = document.toObject<ProductServer>()
+                deletDocument(product.name.toString())
+            }
         }
     }
 
-    private fun loadFromServer() {
+        private fun deletDocument(name: String?) {
+            val db = Firebase.firestore
+            val id = auth.currentUser?.uid
+            val nameCollection: String = ("cart_list" + "_" + id.toString())
+            // ********************* delete viejo ******************
+            name?.let { name -> db.collection(nameCollection).document(name).delete() }
+        }
+
+        private fun uploadMessage(message: String) {
+            val from = auth.currentUser?.uid
+            val to = "Admin"
+            val boolVal = false
+            val db = Firebase.firestore
+            val document = db.collection("chats").document()
+            //val id = document.id
+            val id = getCurrentDateTime()
+            val message = MessageServer(id, from, to, message, boolVal, true, boolVal)
+            db.collection("chats").document(id).set(message)
+        }
+
+        private fun updateFromView(message: String) {
+            with(binding) {
+                messageInputEditText.setText("")
+                adapter.add(ChatFromItem(message))
+                chatRecyclerView.smoothScrollToPosition(adapter.itemCount - 1)
+            }
+        }
+
+        private fun updateToView(message: String) {
+            with(binding) {
+                messageInputEditText.setText("")
+                adapter.add(ChatToItem(message))
+                chatRecyclerView.smoothScrollToPosition(adapter.itemCount - 1)
+            }
+        }
+
+        private fun loadFromServer() {
 
 
-        val db = Firebase.firestore
-        db.collection("chats").get().addOnSuccessListener { result ->
+            val db = Firebase.firestore
+            db.collection("chats").get().addOnSuccessListener { result ->
 
-            for (document in result){
-                //
-                val message= document.toObject<MessageServer>()
-                if (message.from.toString() == auth.currentUser?.uid.toString()){
-                    adapter.add(ChatFromItem(message.text.toString()))
+                for (document in result) {
+                    //
+                    val message = document.toObject<MessageServer>()
+                    if (message.from.toString() == auth.currentUser?.uid.toString()) {
+                        adapter.add(ChatFromItem(message.text.toString()))
+                    } else if (message.to.toString() == auth.currentUser?.uid.toString()) {
+                        adapter.add(ChatToItem(message.text.toString()))
+                    } else if ((message.from.toString() == "Admin")
+                        && message.to.toString() == "Everybody"
+                    ) {
+                        adapter.add(ChatToItem(message.text.toString()))
+                    }
+
                 }
-                else if (message.to.toString() == auth.currentUser?.uid.toString()){
-                    adapter.add(ChatToItem(message.text.toString()))
-                }
-                else if ((message.from.toString() == "Admin")
-                        &&   message.to.toString() == "Everybody"){
-                    adapter.add(ChatToItem(message.text.toString()))
-                }
+                binding.chatRecyclerView.adapter = adapter
+                if (adapter.itemCount > 0) binding.chatRecyclerView.smoothScrollToPosition(adapter.itemCount - 1)
 
             }
-            binding.chatRecyclerView.adapter = adapter
-            if (adapter.itemCount > 0) binding.chatRecyclerView.smoothScrollToPosition(adapter.itemCount-1)
 
         }
 
-    }
-
-
 }
+
 class ChatFromItem (private val message: String): Item<GroupieViewHolder>() {
 
     override fun getLayout(): Int {
