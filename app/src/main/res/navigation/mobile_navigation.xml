@@ -23,7 +23,12 @@
         android:id="@+id/nav_chat"
         android:name="com.eljeff.appfinalproject.ui.chat.ChatFragment"
         android:label="@string/title_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="change"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.eljeff.appfinalproject.ui.profile.ProfileFragment"

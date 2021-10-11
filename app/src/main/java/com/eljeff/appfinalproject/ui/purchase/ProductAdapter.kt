@@ -107,15 +107,16 @@ class ProductAdapter(
                     if(amount.isEmpty()){
                         amount = "1"
                     }
-                    val selectedProduct: ProductServer = ProductServer(
+                    /*val selectedProduct: ProductServer = ProductServer(
                         id = product.id,
                         name = product.name,
                         cost = product.cost,
                         amount = amount,
                         description = product.description,
                         urlPicture = product.urlPicture
-                    )
-                    onItemClicked(selectedProduct)
+                    )*/
+                    product.amount = amount
+                    onItemClicked(product)
 
                 }
 
