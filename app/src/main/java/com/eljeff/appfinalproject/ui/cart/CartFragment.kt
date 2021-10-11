@@ -88,9 +88,7 @@ class CartFragment : Fragment() {
             for (document in result){
                 val product: ProductServer = document.toObject<ProductServer>()
                 listProducts.add(product)
-                /*if (product.id == id) {
-                    listProducts.add(product)
-                }*/
+
             }
             cartAdapter.appendItems(listProducts)
         }
