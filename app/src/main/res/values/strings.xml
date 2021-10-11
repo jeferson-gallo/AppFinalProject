@@ -71,4 +71,5 @@
     <string name="buy">Comprar:</string>
     <string name="accept">Comprar</string>
     <string name="cancel">Revisar</string>
+    <string name="update_data">Actualizar Datos</string>
 </resources>
