@@ -1,10 +1,10 @@
 package com.eljeff.appfinalproject.data.server
 
 class ProductServer (
-    val id: String? = null,
-    val name: String? = null,
-    val cost: String? = null,
-    val amount: String? = null,
-    val description: String? = null,
-    val urlPicture: String? = null
+    var id: String? = null,
+    var name: String? = null,
+    var cost: String? = null,
+    var amount: String? = null,
+    var description: String? = null,
+    var urlPicture: String? = null
 )
