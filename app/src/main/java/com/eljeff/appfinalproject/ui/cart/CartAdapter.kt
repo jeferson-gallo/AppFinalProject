@@ -45,9 +45,10 @@ class CartAdapter(
         fun bind(product: ProductServer){
             with(binding){
 
-                cartCostTxVw.text = ("Precio: " + product.cost.toString() + "$")
+                cartCostTxVw.text = ("Precio: " + product.cost + "$")
                 cartDescriptionTxVw.text = ("Descripción: " + product.description)
                 cartProductNameTxVw.text = product.name
+                cartAmountEdTx.setText(product.amount)
 
                 if(product.urlPicture != null){
                     Picasso.get().load(product.urlPicture).into(cartProductImgVw)

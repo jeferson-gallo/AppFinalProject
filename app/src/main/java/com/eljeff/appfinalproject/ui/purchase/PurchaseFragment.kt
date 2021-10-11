@@ -1,6 +1,7 @@
 package com.eljeff.appfinalproject.ui.purchase
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +51,8 @@ class PurchaseFragment : Fragment() {
         // cargamos la lista de productos desde la base de datos
         loadFromServer()
 
+        // actializamos precio total
+        updateAmount()
         return root
     }
 
@@ -85,21 +88,29 @@ class PurchaseFragment : Fragment() {
     private fun updateAmount() {
         val db = Firebase.firestore
         val id = auth.currentUser?.uid
-        var total: Long = 0
+        val nameCollection:String = ("cart_list"+"_"+id.toString())
 
-        db.collection("cart_list").get().addOnSuccessListener { result ->
 
-            var listProducts: MutableList<ProductServer> = arrayListOf()
+        db.collection(nameCollection).get().addOnSuccessListener { result ->
+
+            var total: Double = 0.0
 
             for (document in result){
                 val product: ProductServer = document.toObject<ProductServer>()
-                if (product.id == id) {
-                    total = total + product.cost!!
-                }
+                val costProduct = product.cost?.toDouble()
+                val amount = product.amount?.toDouble()
+                //Log.d("amount", String.format("%.3f",amount))
+                total += (costProduct!! * amount!!)
+
             }
 
+            val totalSatring = "Total: " + String.format("%.3f",total) + "$"
+            //val totalSatring = "Total: " + total.toString() + "$"
+
+            binding.totalTxVw.text = totalSatring
+
         }
-        binding.totalTxVw.text = "Total: " + total.toString() + "$"
+
 
     }
 

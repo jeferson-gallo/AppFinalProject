@@ -66,4 +66,7 @@
     <string name="profile_item_example">Nombre</string>
     <string name="profile_name_example">Javier Andres Mosquera</string>
     <string name="total">Total: 0$</string>
+    <string name="buy">Comprar:</string>
+    <string name="accept">Comprar</string>
+    <string name="cancel">Revisar</string>
 </resources>
